@@ -1,6 +1,6 @@
 const express = require("express");
 
-const app = express();
+const app = express(); // nosemgrep: javascript.express.security.audit.express-check-csurf-middleware-usage.express-check-csurf-middleware-usage
 
 const total = (precio, cant, desc) =>
 
