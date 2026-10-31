@@ -27,6 +27,9 @@ jobs:
 
       # Descarga el código del repo. Se fija a un SHA de commit (no a un tag
       # que puede cambiar) para evitar ataques de cadena de suministro.
+      # Ojo: este SHA es de un commit del repo actions/checkout, NO de este repo.
+      # No cambia con nuestros commits; solo se actualiza para usar una versión
+      # nueva de la acción. 
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
         # fetch-depth: 0 trae todo el historial para que Gitleaks revise todos los commits.
@@ -49,7 +52,8 @@ jobs:
       - run: semgrep scan --config auto --error
 
       # Gitleaks busca secretos expuestos (claves, tokens, contraseñas) en el código y el historial.
-      # También fijado a un SHA de commit, igual que checkout.
+      # También fijado a un SHA de commit, igual que checkout (es un commit del
+      # repo gitleaks/gitleaks-action y tampoco cambia con nuestros commits).
       - uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7
 
         # Variables de entorno que recibe la acción de Gitleaks.
